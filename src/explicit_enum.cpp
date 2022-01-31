@@ -29,12 +29,19 @@ export namespace ReturnValue {
 	enum write {
 		write_fail = -1,
 	};
+	const char* dlerror_no_error = nullptr;
+	enum dl {
+		dlclose_success = 0,
+	};
 	enum error {
 	   error_executing_program = 1,
 	   error_forking_process,
 	   error_opening_file,
 	   error_not_enough_args,
 	   error_writing_to_file,
+	   error_dlclose_fail,
+	   error_dlsym_fail,
+	   error_dlopen_fail,
 	};
 };
 export namespace MmapValue {

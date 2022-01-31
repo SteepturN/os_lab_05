@@ -45,5 +45,7 @@ int main(int argc, char *argv[]) {
 				break;
 		}
 	}
+
+	DynamicLibrary::detach();
 	return 0;
 }
