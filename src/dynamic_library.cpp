@@ -48,7 +48,7 @@ namespace DynamicLibrary {
 	}
 
 	export void init( float ( *&SinIntegral )( float, float, float ),
-	                  float ( *&E )( int ) ) {
+	                  char* ( *&translation )( long ) ) {
 		sin_trap = dlopen( "./libsin_trap.so", RTLD_LAZY );
 		check_errors_dlopen();
 		sin_rect = dlopen( "./libsin_rect.so", RTLD_LAZY );
@@ -66,11 +66,11 @@ namespace DynamicLibrary {
 		SinIntegral = reinterpret_cast< float( * )( float, float, float ) >
 			( dlsym( sin_file_ptr, "SinIntegral" ) );
 		check_errors_dlsym();
-		E = reinterpret_cast< float( * )( int ) >( dlsym( e_file_ptr, "E" ) );
+		translation = reinterpret_cast< char*( * )( long ) >( dlsym( e_file_ptr, "translation" ) );
 		check_errors_dlsym();
 	}
 	export void switch_realisation( float ( *&SinIntegral )( float, float, float ),
-	                                float ( *&E )( int ) ) {
+	                                char* ( *&translation )( long ) ) {
 		void* sin_file_ptr;
 		void* e_file_ptr;
 		switch( func_type ) {
@@ -86,7 +86,7 @@ namespace DynamicLibrary {
 		SinIntegral = reinterpret_cast< float ( * )( float, float, float ) >
 			( dlsym( sin_file_ptr, "SinIntegral" ) );
 		check_errors_dlsym();
-		E = reinterpret_cast< float( * )( int ) >( dlsym( e_file_ptr, "E" ) );
+		translation = reinterpret_cast< char*( * )( long ) >( dlsym( e_file_ptr, "translation" ) );
 		check_errors_dlsym();
 	}
 	export void detach() {

@@ -4,7 +4,7 @@ import explicit_enum;
 
 extern "C" {
 	float SinIntegral(float, float, float);
-	float E(int);
+	char* translation(long);
 }
 
 int main(int argc, char *argv[]) {
@@ -13,9 +13,12 @@ int main(int argc, char *argv[]) {
 	const int count_1_func_args = 3;
 	float args_func1[ count_1_func_args ];
 	const int count_2_func_args = 1;
-	int args_func2[ count_2_func_args ];
+	long args_func2[ count_2_func_args ];
+	std::cout << "SinIntegral ( command = 1 ): 3 float args\n"
+			  << "translation ( command = 2 ): 1 float arg\n";
 
 	while( true ) {
+		std::cout << "> ";
 		std::cin >> command;
 		if( std::cin.fail() )
 			return ReturnValue::nice;
@@ -35,7 +38,9 @@ int main(int argc, char *argv[]) {
 					if( std::cin.fail() )
 						return ReturnValue::nice;
 				}
-				std::cout << E( args_func2[ 0 ] ) << std::endl;
+				char* delete_this = translation( args_func2[ 0 ] );
+				std::cout << delete_this << std::endl;
+				delete delete_this;
 				break;
 		}
 	}
